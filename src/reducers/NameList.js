@@ -1,11 +1,11 @@
-import { ADD_TODO, DELETE_TODO, EDIT_TODO, MARK_TODO, MARK_ALL, CLEAR_MARKED }
+import { ADD_NAME, DELETE_NAME, EDIT_NAME, MARK_NAME, MARK_ALL, CLEAR_MARKED }
   from '../constants/NamesListActionTypes';
 
 const initialState = [];
 
 export default function nameList(state = initialState, action) {
   switch (action.type) {
-  case ADD_TODO:
+  case ADD_NAME:
     return [{
       id: (state.length === 0) ? 1 : state[0].id + 1,
       marked: false,
@@ -13,19 +13,19 @@ export default function nameList(state = initialState, action) {
       listNo: action.listNo
     }, ...state];
 
-  case DELETE_TODO:
+  case DELETE_NAME:
     return state.filter(todo =>
       todo.id !== action.id
     );
 
-  case EDIT_TODO:
+  case EDIT_NAME:
     return state.map(todo =>
       todo.id === action.id ?
         { ...todo, text: action.text } :
         todo
     );
 
-  case MARK_TODO:
+  case MARK_NAME:
     return state.map(todo =>
       todo.id === action.id ?
         { ...todo, marked: !todo.marked } :

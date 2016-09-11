@@ -7,7 +7,7 @@ export default class NameInput extends Component {
     text: PropTypes.string,
     placeholder: PropTypes.string,
     editing: PropTypes.bool,
-    newTodo: PropTypes.bool
+    newName: PropTypes.bool
   };
 
   constructor(props, context) {
@@ -19,38 +19,33 @@ export default class NameInput extends Component {
 
   handleSubmit(e) {
     const text = e.target.value.trim();
-    if (e.which === 13) {
+    const Enter = 13;
+    if (e.which === Enter) {
       this.props.onSave(text);
-      if (this.props.newTodo) {
+      if (this.props.newName) {
         this.setState({ text: '' });
       }
     }
   }
 
-  handleChange(e) {
-    this.setState({ text: e.target.value });
+  handleChange(event) {
+    this.setState({ text: event.target.value });
   }
 
-  handleBlur(e) {
-    if (!this.props.newTodo) {
-      this.props.onSave(e.target.value);
+  handleBlur(event) {
+    if (!this.props.newName) {
+      this.props.onSave(event.target.value);
     }
   }
-
-  handleChange = (event) => {
-    this.setState({
-      text: event.target.value,
-    });
-  };
 
   render() {
     return (
       <TextField
         hintText=""
         floatingLabelText={this.props.placeholder}
-        onKeyDown={e => { this.handleSubmit(e); }}
+        onKeyDown={forward => { this.handleSubmit(forward); }}
         value={this.state.text}
-        onChange={e => { this.handleChange(e); }}
+        onChange={forward => { this.handleChange(forward); }}
       />
     );
   }

@@ -1,31 +1,31 @@
 import * as types from '../constants/NamesListActionTypes';
 
-export function addTodo(text, listNo) {
+export function addName(text, listNo) {
   return {
-    type: types.ADD_TODO,
+    type: types.ADD_NAME,
     text,
     listNo
   };
 }
 
-export function deleteTodo(id) {
+export function deleteName(id) {
   return {
-    type: types.DELETE_TODO,
+    type: types.DELETE_NAME,
     id
   };
 }
 
-export function editTodo(id, text) {
+export function editName(id, text) {
   return {
-    type: types.EDIT_TODO,
+    type: types.EDIT_NAME,
     id,
     text
   };
 }
 
-export function markTodo(id) {
+export function markName(id) {
   return {
-    type: types.MARK_TODO,
+    type: types.MARK_NAME,
     id
   };
 }

@@ -1,15 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import classnames from 'classnames';
-import NameInput from './NameInput';
 import {ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 
 export default class NameItem extends Component {
   static propTypes = {
     name: PropTypes.object.isRequired,
-    editTodo: PropTypes.func.isRequired,
-    deleteTodo: PropTypes.func.isRequired,
-    markTodo: PropTypes.func.isRequired
+    editName: PropTypes.func.isRequired,
+    deleteName: PropTypes.func.isRequired,
+    markName: PropTypes.func.isRequired
   };
 
   constructor(props, context) {
@@ -25,30 +23,15 @@ export default class NameItem extends Component {
 
   handleSave(id, text) {
     if (text.length === 0) {
-      this.props.deleteTodo(id);
+      this.props.deleteName(id);
     } else {
-      this.props.editTodo(id, text);
+      this.props.editName(id, text);
     }
     this.setState({ editing: false });
   }
 
   render() {
-    const {name, markTodo, deleteTodo} = this.props;
-
-    let element;
-    if (this.state.editing) {
-      element = (
-        <NameInput text={name.text}
-                       editing={this.state.editing}
-                       onSave={(text) => this.handleSave(name.id, text)} />
-      );
-    } else {
-      element = (
-        <ListItem
-          primaryText={name.text}
-        />
-      );
-    }
+    const {name} = this.props;
 
     return (
       <div>

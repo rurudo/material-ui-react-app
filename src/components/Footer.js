@@ -1,5 +1,4 @@
 import React, { PropTypes, Component } from 'react';
-import classnames from 'classnames';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Badge from 'material-ui/Badge';
@@ -48,16 +47,4 @@ export default class Footer extends Component {
     );
   }
 
-  renderListLink(listNo) {
-    const title = 'リスト' + listNo;
-    const { listNo: selectedlistNo, onShow } = this.props;
-
-    return (
-      <a className={classnames({ selected: listNo === selectedlistNo })}
-         style={{ cursor: 'hand' }}
-         onClick={() => onShow(listNo)}>
-        {title}
-      </a>
-    );
-  }
 }

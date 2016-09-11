@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Header from '../components/Header';
-import MainSection from '../components/MainSection';
+import NameList from '../components/NameList';
 import * as NamesListActions from '../actions/NamesListActions';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Order from '../components/Order';
@@ -33,10 +33,10 @@ class Frame extends Component {
 	    </Tab>
 	    <Tab label="メモ">
         <Header
-          addTodo={actions.addTodo}
+          addName={actions.addName}
           listNo={listNo}
         />
-        <MainSection
+        <NameList
           nameList={nameList}
           actions={actions}
           onShow={(forward) => this.handleShow(forward)}

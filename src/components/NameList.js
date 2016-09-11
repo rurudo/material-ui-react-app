@@ -4,7 +4,7 @@ import Footer from './Footer';
 import {List} from 'material-ui/List';
 
 
-export default class MainSection extends Component {
+export default class NameList extends Component {
   static propTypes = {
     nameList: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired,
@@ -17,8 +17,8 @@ export default class MainSection extends Component {
 
     const selectedList = nameList.filter(name => name.listNo === listNo);
     
-    const markedCount = nameList.reduce((count, todo) =>
-      todo.marked ? count + 1 : count,
+    const markedCount = nameList.reduce((count, name) =>
+      name.marked ? count + 1 : count,
       0
     );
 
