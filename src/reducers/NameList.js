@@ -1,9 +1,22 @@
 import { ADD_NAME, DELETE_NAME, EDIT_NAME, MARK_NAME, MARK_ALL, CLEAR_MARKED }
   from '../constants/NamesListActionTypes';
 
-const initialState = [];
+import cookie from 'component-cookie'
+
+const key = 'nameList';
+const initialJson = cookie(key);
+const initialState = initialJson === undefined? [] :
+  JSON.parse(initialJson).array;
 
 export default function nameList(state = initialState, action) {
+  const list = _nameList(state, action);
+  const values = {};
+  values['array'] = list;
+  cookie(key, JSON.stringify(values));
+  return list;
+}
+
+function _nameList(state = initialState, action) {
   switch (action.type) {
   case ADD_NAME:
     return [{
