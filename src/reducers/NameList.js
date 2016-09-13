@@ -4,15 +4,15 @@ import { ADD_NAME, DELETE_NAME, EDIT_NAME, MARK_NAME, MARK_ALL, CLEAR_MARKED }
 import cookie from 'component-cookie'
 
 const key = 'nameList';
-const initialJson = cookie(key);
-const initialState = initialJson === undefined? [] :
+const initialJson = window.localStorage.getItem(key);
+const initialState = initialJson === null? [] :
   JSON.parse(initialJson).array;
 
 export default function nameList(state = initialState, action) {
   const list = _nameList(state, action);
   const values = {};
-  values['array'] = list;
-  cookie(key, JSON.stringify(values));
+  values.array = list;
+  window.localStorage.setItem(key, JSON.stringify(values));
   return list;
 }
 

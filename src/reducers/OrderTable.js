@@ -3,7 +3,7 @@ import { SELECT_POSITION, SELECT_NAME, SELECT_INDEX } from '../constants/OrderTa
 import cookie from 'component-cookie'
 
 const key = 'orderTable';
-const initialJson = cookie(key);
+const initialJson = window.localStorage.getItem(key);
 
 const initialArray = [];
 for(let i = 0; i < 10; i++) {
@@ -14,14 +14,14 @@ for(let i = 0; i < 10; i++) {
     });
 }
 
-const initialState = initialJson === undefined? initialArray :
+const initialState = initialJson === null? initialArray :
   JSON.parse(initialJson).array;
   
 export default function orderTable(state = initialState, action) {
   const list = _orderTable(state, action);
   const values = {};
   values.array = list;
-  cookie(key, JSON.stringify(values));
+  window.localStorage.setItem(key, JSON.stringify(values));
   return list;
 }
 
