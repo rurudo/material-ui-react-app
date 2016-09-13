@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import {ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+import IconButton from 'material-ui/IconButton';
+import IconClear from 'material-ui/svg-icons/content/clear';
 
 export default class NameItem extends Component {
   static propTypes = {
@@ -31,12 +33,20 @@ export default class NameItem extends Component {
   }
 
   render() {
-    const {name} = this.props;
+    const {name, deleteName} = this.props;
+    const rightButton = (
+      <IconButton
+        onClick={() => deleteName(name.id)}
+      >
+        <IconClear/>
+      </IconButton>
+    );
 
     return (
       <div>
         <ListItem
           primaryText={name.text}
+          rightIconButton={rightButton}
         />
         <Divider />
       </div>

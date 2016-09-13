@@ -1,8 +1,6 @@
 import { ADD_NAME, DELETE_NAME, EDIT_NAME, MARK_NAME, MARK_ALL, CLEAR_MARKED }
   from '../constants/NamesListActionTypes';
 
-import cookie from 'component-cookie'
-
 const key = 'nameList';
 const initialJson = window.localStorage.getItem(key);
 const initialState = initialJson === null? [] :
@@ -27,33 +25,33 @@ function _nameList(state = initialState, action) {
     }, ...state];
 
   case DELETE_NAME:
-    return state.filter(todo =>
-      todo.id !== action.id
+    return state.filter(name =>
+      name.id !== action.id
     );
 
   case EDIT_NAME:
-    return state.map(todo =>
-      todo.id === action.id ?
-        { ...todo, text: action.text } :
-        todo
+    return state.map(name =>
+      name.id === action.id ?
+        { ...name, text: action.text } :
+        name
     );
 
   case MARK_NAME:
-    return state.map(todo =>
-      todo.id === action.id ?
-        { ...todo, marked: !todo.marked } :
-        todo
+    return state.map(name =>
+      name.id === action.id ?
+        { ...name, marked: !name.marked } :
+        name
     );
 
   case MARK_ALL:
-    const areAllMarked = state.every(todo => todo.marked);
-    return state.map(todo => ({
-      ...todo,
+    const areAllMarked = state.every(name => name.marked);
+    return state.map(name => ({
+      ...name,
       marked: !areAllMarked
     }));
 
   case CLEAR_MARKED:
-    return state.filter(todo => todo.marked === false);
+    return state.filter(name => name.marked === false);
 
   default:
     return state;

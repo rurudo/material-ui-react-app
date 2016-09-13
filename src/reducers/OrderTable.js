@@ -1,7 +1,5 @@
 import { SELECT_POSITION, SELECT_NAME, SELECT_INDEX } from '../constants/OrderTableActionTypes';
 
-import cookie from 'component-cookie'
-
 const key = 'orderTable';
 const initialJson = window.localStorage.getItem(key);
 
