@@ -32,10 +32,18 @@ export default class NameSelectField extends Component {
       });
     }    
   }
+  
+  removeDeletedName() {
+    const { row, names, actions } = this.props;
+    if(row.name && names.find(name => name.id === row.name) === undefined) {
+      actions.selectName(row.id, "");
+    }
+  }
 
   render() {
     const { row, names } = this.props;
     this.addReserve();
+    this.removeDeletedName();
     
     return (
       <SelectField
