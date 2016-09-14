@@ -2,6 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import NameItem from './NameItem';
 import Footer from './Footer';
 import {List} from 'material-ui/List';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 export default class NameList extends Component {
@@ -10,6 +13,30 @@ export default class NameList extends Component {
     actions: PropTypes.object.isRequired,
     onShow: PropTypes.func.isRequired,
     listNo: PropTypes.number.isRequired
+  };
+  
+  state = {
+    open: false,
+    deleteId: null
+  };
+
+  handleOpen = (id) => {
+    this.setState({
+      open: true,
+      deleteId: id
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      open: false,
+      deleteId: null
+    });
+  };
+  
+  handleDelete = () => {
+    this.props.actions.deleteName(this.state.deleteId);
+    this.handleClose();
   };
 
   render() {
@@ -21,14 +48,43 @@ export default class NameList extends Component {
       name.marked ? count + 1 : count,
       0
     );
+    
+    const buttonActions = [
+      <FlatButton
+        label="いいえ"
+        primary={true}
+        onTouchTap={this.handleClose}
+      />,
+      <FlatButton
+        label="はい"
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.handleDelete}
+      />,
+    ];
 
     return (
-      <List>
-        {selectedList.map(name =>
-          <NameItem key={name.id} name={name} {...actions} />
-        )}
-        {this.renderFooter(markedCount)}
-      </List>
+      <div>
+        <Dialog
+          title="削除しますか？"
+          actions={buttonActions}
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleClose}
+        >
+        </Dialog>
+        <List>
+          {selectedList.map(name =>
+            <NameItem
+              key={name.id}
+              name={name}
+              onRequestOpen={this.handleOpen}
+              {...actions}
+            />
+          )}
+          {this.renderFooter(markedCount)}
+        </List>
+      </div>
     );
   }
 

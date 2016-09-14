@@ -9,7 +9,8 @@ export default class NameItem extends Component {
     name: PropTypes.object.isRequired,
     editName: PropTypes.func.isRequired,
     deleteName: PropTypes.func.isRequired,
-    markName: PropTypes.func.isRequired
+    markName: PropTypes.func.isRequired,
+    onRequestOpen: PropTypes.func.isRequired
   };
 
   constructor(props, context) {
@@ -33,10 +34,10 @@ export default class NameItem extends Component {
   }
 
   render() {
-    const {name, deleteName} = this.props;
+    const {name, onRequestOpen} = this.props;
     const rightButton = (
       <IconButton
-        onClick={() => deleteName(name.id)}
+        onClick={() => onRequestOpen(name.id)}
       >
         <IconClear/>
       </IconButton>
